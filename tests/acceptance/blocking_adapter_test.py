@@ -97,7 +97,7 @@ class BlockingTestCaseBase(unittest.TestCase):
                 return real_poll(*args, **kwargs)
             except BaseException as exc:
                 self.fail('Unwanted exception leaked into asynchronous layer '
-                          'via ioloop.poll(): {!r}'.format(exc))
+                          f'via ioloop.poll(): {exc!r}')
 
         connection._impl.ioloop.poll = my_poll
         self.addCleanup(setattr, connection._impl.ioloop, 'poll', real_poll)
@@ -112,7 +112,7 @@ class BlockingTestCaseBase(unittest.TestCase):
                 raise
             except BaseException as exc:
                 self.fail('Unwanted exception leaked into asynchronous layer '
-                          'via ioloop.process_timeouts(): {!r}'.format(exc))
+                          f'via ioloop.process_timeouts(): {exc!r}')
 
         connection._impl.ioloop.process_timeouts = my_process_timeouts
         self.addCleanup(setattr, connection._impl.ioloop, 'process_timeouts',

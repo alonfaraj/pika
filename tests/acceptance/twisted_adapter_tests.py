@@ -283,7 +283,7 @@ class TwistedChannelTestCase(TestCase):
             "is_open", "flow_active", "consumer_tags",
         )
         for name in attributes:
-            value = "testvalue-{}".format(name)
+            value = f"testvalue-{name}"
             setattr(self.pika_channel, name, value)
             self.assertEqual(getattr(self.channel, name), value)
 

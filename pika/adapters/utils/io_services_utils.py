@@ -50,8 +50,7 @@ def check_callback_arg(callback, name):
 
     """
     if not callable(callback):
-        raise TypeError('{} must be callable, but got {!r}'.format(
-            name, callback))
+        raise TypeError(f'{name} must be callable, but got {callback!r}')
 
 
 def check_fd_arg(fd):
@@ -204,8 +203,7 @@ class _AsyncSocketConnector:
                     'Unable to check resolved address: no socket.inet_pton().')
             else:
                 msg = ('Invalid or unresolved IP address '
-                       '{!r} for socket {}: {!r}').format(
-                           resolved_addr, sock, error)
+                       f'{resolved_addr!r} for socket {sock}: {error!r}')
                 _LOGGER.error(msg)
                 raise ValueError(msg)
 
@@ -387,7 +385,7 @@ class _AsyncStreamConnector:
 
         if not isinstance(ssl_context, (type(None), ssl.SSLContext)):
             raise ValueError('Expected ssl_context=None | ssl.SSLContext, but '
-                             'got {!r}'.format(ssl_context))
+                             f'got {ssl_context!r}')
 
         if server_hostname is not None and ssl_context is None:
             raise ValueError('Non-None server_hostname must not be passed '
@@ -401,7 +399,7 @@ class _AsyncStreamConnector:
         except Exception as error:
             raise ValueError(
                 'Expected connected socket, but getpeername() failed: '
-                'error={!r}; {}; '.format(error, sock))
+                f'error={error!r}; {sock}; ')
 
         self._nbio = nbio
         self._protocol_factory = protocol_factory

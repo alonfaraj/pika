@@ -126,8 +126,7 @@ class TwistedChannel:
             self._on_consumer_cancelled_by_broker)
 
     def __repr__(self):
-        return '<{cls} channel={chan!r}>'.format(
-            cls=self.__class__.__name__, chan=self._channel)
+        return f'<{self.__class__.__name__} channel={self._channel!r}>'
 
     def _on_channel_closed(self, _channel, reason):
         # enter the closed state

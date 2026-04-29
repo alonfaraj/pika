@@ -55,7 +55,7 @@ class TestConstructAndImmediatelyCloseConnection(AsyncTestCase,
         @async_test_base.make_stop_on_error_with_self(self)
         def on_opened(connection):
             self.fail('Connection should have aborted, but got '
-                      'on_opened({!r})'.format(connection))
+                      f'on_opened({connection!r})')
 
         @async_test_base.make_stop_on_error_with_self(self)
         def on_open_error(connection, error):
@@ -98,7 +98,7 @@ class TestCloseConnectionDuringAMQPHandshake(AsyncTestCase, AsyncAdapters):
         @async_test_base.make_stop_on_error_with_self(self)
         def on_opened(connection):
             self.fail('Connection should have aborted, but got '
-                      'on_opened({!r})'.format(connection))
+                      f'on_opened({connection!r})')
 
         @async_test_base.make_stop_on_error_with_self(self)
         def on_open_error(connection, error):
@@ -128,7 +128,7 @@ class TestSocketConnectTimeoutWithTinySocketTimeout(AsyncTestCase,
         @async_test_base.make_stop_on_error_with_self(self)
         def on_opened(connection):
             self.fail('Socket connection should have timed out, but got '
-                      'on_opened({!r})'.format(connection))
+                      f'on_opened({connection!r})')
 
         @async_test_base.make_stop_on_error_with_self(self)
         def on_open_error(connection, error):
@@ -158,14 +158,13 @@ class TestStackConnectionTimeoutWithTinyStackTimeout(AsyncTestCase, AsyncAdapter
         @async_test_base.make_stop_on_error_with_self(self)
         def on_opened(connection):
             self.fail('Stack connection should have timed out, but got '
-                      'on_opened({!r})'.format(connection))
+                      f'on_opened({connection!r})')
 
         def on_open_error(connection, exception):
             error = None
             if not isinstance(exception, pika.exceptions.AMQPConnectionError):
                 error = AssertionError(
-                    'Expected AMQPConnectionError, but got {!r}'.format(
-                        exception))
+                    f'Expected AMQPConnectionError, but got {exception!r}')
             self.stop(error)
 
         connection_class(
@@ -564,8 +563,7 @@ class TestConsumeCancel(AsyncTestCase, AsyncAdapters):
 
     def on_queue_declared(self, frame):
         for i in range(0, 100):
-            msg_body = '{}:{}:{}'.format(self.__class__.__name__, i,
-                                         time_now())
+            msg_body = f'{self.__class__.__name__}:{i}:{time_now()}'
             self.channel.basic_publish('', self.queue_name, msg_body)
         self.ctag = self.channel.basic_consume(self.queue_name,
                                                self.on_message,

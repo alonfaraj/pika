@@ -31,7 +31,7 @@ The name of the module, `blocking_consume_recover_multiple_hosts.py`, reflects i
 
 
 def on_message(ch, method_frame, _header_frame, body, userdata=None):
-    print('Userdata: {} Message body: {}'.format(userdata, body))
+    print(f'Userdata: {userdata} Message body: {body}')
     ch.basic_ack(delivery_tag=method_frame.delivery_tag)
 
 

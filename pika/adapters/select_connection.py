@@ -162,7 +162,7 @@ class _Timeout:
 
         if not callable(callback):
             raise TypeError(
-                'callback must be a callable, but got {!r}'.format(callback))
+                f'callback must be a callable, but got {callback!r}')
 
         self.deadline = deadline
         self.callback = callback
@@ -249,7 +249,7 @@ class _Timer:
 
         if delay < 0:
             raise ValueError(
-                'call_later: delay must be non-negative, but got {!r}'.format(delay))
+                f'call_later: delay must be non-negative, but got {delay!r}')
 
         now = pika.compat.time_now()
 
@@ -467,7 +467,7 @@ class IOLoop(AbstractSelectorIOLoop):
         """
         if not callable(callback):
             raise TypeError(
-                'callback must be a callable, but got {!r}'.format(callback))
+                f'callback must be a callable, but got {callback!r}')
 
         # NOTE: `deque.append` is atomic
         self._callbacks.append(callback)

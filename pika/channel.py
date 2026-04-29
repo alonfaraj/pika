@@ -99,9 +99,7 @@ class Channel:
         return self.channel_number
 
     def __repr__(self):
-        return '<{} number={} {} conn={!r}>'.format(
-            self.__class__.__name__, self.channel_number,
-            self._STATE_NAMES[self._state], self.connection)
+        return f'<{self.__class__.__name__} number={self.channel_number} {self._STATE_NAMES[self._state]} conn={self.connection!r}>'
 
     def add_callback(self, callback, replies, one_shot=True):
         """Pass in a callback handler and a list replies from the

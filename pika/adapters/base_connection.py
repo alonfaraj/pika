@@ -50,7 +50,7 @@ class BaseConnection(connection.Connection):
         """
         if parameters and not isinstance(parameters, connection.Parameters):
             raise ValueError(
-                'Expected instance of Parameters, not {!r}'.format(parameters))
+                f'Expected instance of Parameters, not {parameters!r}')
 
         self._nbio = nbio
 
@@ -101,9 +101,7 @@ class BaseConnection(connection.Connection):
         #
         #     return '%s->%s' % (sockname, peername)
         # TODO need helpful __repr__ in transports
-        return ('<{} {} transport={} params={}>'.format(
-            self.__class__.__name__, self._STATE_NAMES[self.connection_state],
-            self._transport, self.params))
+        return (f'<{self.__class__.__name__} {self._STATE_NAMES[self.connection_state]} transport={self._transport} params={self.params}>')
 
     @classmethod
     @abc.abstractmethod
@@ -218,7 +216,7 @@ class BaseConnection(connection.Connection):
         """
         if not callable(callback):
             raise TypeError(
-                'callback must be a callable, but got {!r}'.format(callback))
+                f'callback must be a callable, but got {callback!r}')
 
         self._nbio.add_callback_threadsafe(callback)
 
@@ -339,8 +337,7 @@ class BaseConnection(connection.Connection):
             # NOTE: On success, the stack will be up already, so there is no
             #       corresponding callback.
             assert conn_or_exc is self, \
-                'Expected self conn={!r} from workflow, but got {!r}.'.format(
-                    self, conn_or_exc)
+                f'Expected self conn={self!r} from workflow, but got {conn_or_exc!r}.'
 
     def _handle_connection_workflow_failure(self, error):
         """Handle failure of self-initiated stack bring-up and call

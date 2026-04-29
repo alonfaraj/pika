@@ -5,16 +5,14 @@
 class AMQPError(Exception):
 
     def __repr__(self):
-        return '{}: An unspecified AMQP error has occurred; {}'.format(
-            self.__class__.__name__, self.args)
+        return f'{self.__class__.__name__}: An unspecified AMQP error has occurred; {self.args}'
 
 
 class AMQPConnectionError(AMQPError):
 
     def __repr__(self):
         if len(self.args) == 2:
-            return '{}: ({}) {}'.format(self.__class__.__name__, self.args[0],
-                                        self.args[1])
+            return f'{self.__class__.__name__}: ({self.args[0]}) {self.args[1]}'
         else:
             return f'{self.__class__.__name__}: {self.args}'
 
@@ -31,10 +29,7 @@ class IncompatibleProtocolError(AMQPConnectionError):
 
     def __repr__(self):
         return (
-            '{}: The protocol returned by the server is not supported: {}'.format(
-                self.__class__.__name__,
-                self.args,
-            ))
+            f'{self.__class__.__name__}: The protocol returned by the server is not supported: {self.args}')
 
 
 class AuthenticationError(AMQPConnectionError):
@@ -99,8 +94,7 @@ class ConnectionClosed(AMQPConnectionError):
         super().__init__(int(reply_code), str(reply_text))
 
     def __repr__(self):
-        return '{}: ({}) {!r}'.format(self.__class__.__name__, self.reply_code,
-                                      self.reply_text)
+        return f'{self.__class__.__name__}: ({self.reply_code}) {self.reply_text!r}'
 
     @property
     def reply_code(self):
@@ -165,8 +159,7 @@ class ChannelClosed(AMQPChannelError):
         super().__init__(int(reply_code), str(reply_text))
 
     def __repr__(self):
-        return '{}: ({}) {!r}'.format(self.__class__.__name__, self.reply_code,
-                                      self.reply_text)
+        return f'{self.__class__.__name__}: ({self.reply_code}) {self.reply_text!r}'
 
     @property
     def reply_code(self):
@@ -266,8 +259,7 @@ class NackError(AMQPChannelError):
 class InvalidChannelNumber(AMQPError):
 
     def __repr__(self):
-        return '{}: An invalid channel number has been specified: {}'.format(
-            self.__class__.__name__, self.args[0])
+        return f'{self.__class__.__name__}: An invalid channel number has been specified: {self.args[0]}'
 
 
 class ProtocolSyntaxError(AMQPError):
@@ -280,15 +272,13 @@ class ProtocolSyntaxError(AMQPError):
 class UnexpectedFrameError(ProtocolSyntaxError):
 
     def __repr__(self):
-        return '{}: Received a frame out of sequence: {!r}'.format(
-            self.__class__.__name__, self.args[0])
+        return f'{self.__class__.__name__}: Received a frame out of sequence: {self.args[0]!r}'
 
 
 class ProtocolVersionMismatch(ProtocolSyntaxError):
 
     def __repr__(self):
-        return '{}: Protocol versions did not match: {!r} vs {!r}'.format(
-            self.__class__.__name__, self.args[0], self.args[1])
+        return f'{self.__class__.__name__}: Protocol versions did not match: {self.args[0]!r} vs {self.args[1]!r}'
 
 
 class BodyTooLongError(ProtocolSyntaxError):
@@ -302,22 +292,19 @@ class BodyTooLongError(ProtocolSyntaxError):
 class InvalidFrameError(ProtocolSyntaxError):
 
     def __repr__(self):
-        return '{}: Invalid frame received: {!r}'.format(self.__class__.__name__,
-                                                   self.args[0])
+        return f'{self.__class__.__name__}: Invalid frame received: {self.args[0]!r}'
 
 
 class InvalidFieldTypeException(ProtocolSyntaxError):
 
     def __repr__(self):
-        return '{}: Unsupported field kind {}'.format(self.__class__.__name__,
-                                                  self.args[0])
+        return f'{self.__class__.__name__}: Unsupported field kind {self.args[0]}'
 
 
 class UnsupportedAMQPFieldException(ProtocolSyntaxError):
 
     def __repr__(self):
-        return '{}: Unsupported field kind {}'.format(self.__class__.__name__,
-                                                  type(self.args[1]))
+        return f'{self.__class__.__name__}: Unsupported field kind {type(self.args[1])}'
 
 
 class MethodNotImplemented(AMQPError):
