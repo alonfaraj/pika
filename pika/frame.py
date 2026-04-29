@@ -150,7 +150,7 @@ class Heartbeat(Frame):
         :rtype: str
 
         """
-        return self._marshal(list())
+        return self._marshal([])
 
 
 class ProtocolHeader(amqp_object.AMQPObject):

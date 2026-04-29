@@ -223,7 +223,7 @@ def generate(specPath):
 
     def genEncodeMethodFields(m):
         print("        def encode(self):")
-        print("            pieces = list()")
+        print("            pieces = []")
         bitindex = None
 
         def finishBits():
@@ -253,7 +253,7 @@ def generate(specPath):
 
     def genEncodeProperties(c):
         print("    def encode(self):")
-        print("        pieces = list()")
+        print("        pieces = []")
         print("        flags = 0")
         for f in c.fields:
             if spec.resolveDomain(f.domain) == 'bit':
@@ -264,7 +264,7 @@ def generate(specPath):
                 print(f"            flags = flags | {flagName(c, f)}")
                 genSingleEncode("            ", f"self.{pyize(f.name)}",
                                 f.domain)
-        print("        flag_pieces = list()")
+        print("        flag_pieces = []")
         print("        while True:")
         print("            remainder = flags >> 16")
         print("            partial_flags = flags & 0xFFFE")

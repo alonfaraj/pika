@@ -268,7 +268,7 @@ class IOLoopTimerTestSelect(IOLoopBaseTest):
         interval.
 
         """
-        self.timer_stack = list()
+        self.timer_stack = []
         for i in range(self.NUM_TIMERS, 0, -1):
             deadline = i * self.TIMER_INTERVAL
             self.ioloop.call_later(
@@ -298,7 +298,7 @@ class IOLoopTimerTestSelect(IOLoopBaseTest):
         corresponding handler generates no exceptions.
 
         """
-        self.timer_stack = list()
+        self.timer_stack = []
         handle_holder = []
         self.timer_got_fired = False
         self.handle = self.ioloop.call_later(

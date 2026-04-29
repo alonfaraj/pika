@@ -1107,7 +1107,7 @@ class KQueuePoller(_PollerBase):
         if self._kqueue is None:
             return
 
-        kevents = list()
+        kevents = []
 
         if events_to_clear & PollEvents.READ:
             kevents.append(

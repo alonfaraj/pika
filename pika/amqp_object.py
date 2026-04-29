@@ -13,7 +13,7 @@ class AMQPObject:
     INDEX = None
 
     def __repr__(self):
-        items = list()
+        items = []
         for key, value in self.__dict__.items():
             if getattr(self.__class__, key, None) != value:
                 items.append(f'{key}={value}')

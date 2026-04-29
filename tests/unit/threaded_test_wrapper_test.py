@@ -110,7 +110,7 @@ class ThreadedTestWrapperSelfChecks(unittest.TestCase):
         arg0 = dict()
         arg1 = tuple()
 
-        kwarg0 = list()
+        kwarg0 = []
 
         result = my_guinea_pig(arg0, arg1, kwarg0=kwarg0)
 

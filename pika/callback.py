@@ -143,7 +143,7 @@ class CallbackManager:
             self._stack[prefix] = dict()
 
         if key not in self._stack[prefix]:
-            self._stack[prefix][key] = list()
+            self._stack[prefix][key] = []
 
         # Check for a duplicate
         for callback_dict in self._stack[prefix][key]:
@@ -218,7 +218,7 @@ class CallbackManager:
         if prefix not in self._stack or key not in self._stack[prefix]:
             return False
 
-        callbacks = list()
+        callbacks = []
         # Check each callback, append it to the list if it should be called
         for callback_dict in list(self._stack[prefix][key]):
             if self._should_process_callback(callback_dict, caller, list(args)):
@@ -252,7 +252,7 @@ class CallbackManager:
 
         """
         if callback_value:
-            offsets_to_remove = list()
+            offsets_to_remove = []
             for offset in range(len(self._stack[prefix][key]), 0, -1):
                 callback_dict = self._stack[prefix][key][offset - 1]
 

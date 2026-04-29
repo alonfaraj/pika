@@ -68,7 +68,7 @@ class Channel:
 
         self._content_assembler = ContentFrameAssembler()
 
-        self._blocked = collections.deque(list())
+        self._blocked = collections.deque([])
         self._blocking = None
         self._has_on_flow_callback = False
         self._cancelled = set()
@@ -1449,7 +1449,7 @@ class ContentFrameAssembler:
         self._method_frame = None
         self._header_frame = None
         self._seen_so_far = 0
-        self._body_fragments = list()
+        self._body_fragments = []
 
     def process(self, frame_value):
         """Invoked by the Channel object when passed frames that are not
@@ -1508,4 +1508,4 @@ class ContentFrameAssembler:
         self._method_frame = None
         self._header_frame = None
         self._seen_so_far = 0
-        self._body_fragments = list()
+        self._body_fragments = []
