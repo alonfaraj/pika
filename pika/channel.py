@@ -1318,8 +1318,7 @@ class Channel:
 
         """
         assert method.synchronous, (
-            'Only synchronous-capable methods may be used with _rpc: %r' %
-            (method,))
+            f'Only synchronous-capable methods may be used with _rpc: {method!r}')
 
         # Validate we got None or a list of acceptable_replies
         if not isinstance(acceptable_replies, (type(None), list)):

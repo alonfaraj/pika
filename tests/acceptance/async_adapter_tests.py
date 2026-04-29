@@ -887,7 +887,7 @@ class TestZ_PublishAndConsumeBig(BoundQueueTestCase, AsyncAdapters):  # pylint: 
 
     @staticmethod
     def _get_msg_body():
-        return '\n'.join(["%s" % i for i in range(0, 2097152)])
+        return '\n'.join([f"{i}" for i in range(0, 2097152)])
 
     def on_ready(self, frame):
         self.ctag = self.channel.basic_consume(self.queue, self.on_message)

@@ -44,14 +44,13 @@ class TestCase(unittest.TestCase):
         """
         def _cb(ignore):
             raise self.failureException(
-                "did not catch an error, instead got %r" % (ignore,))
+                f"did not catch an error, instead got {ignore!r}")
 
         def _eb(failure):
             if failure.check(*expectedFailures):
                 return failure.value
             else:
-                output = ('\nExpected: %r\nGot:\n%s'
-                          % (expectedFailures, str(failure)))
+                output = (f'\nExpected: {expectedFailures!r}\nGot:\n{str(failure)}')
                 raise self.failureException(output)
         return d.addCallbacks(_cb, _eb)
 

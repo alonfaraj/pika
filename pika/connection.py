@@ -124,9 +124,7 @@ class Parameters:  # pylint: disable=R0902
         :rtype: str
 
         """
-        return ('<%s host=%s port=%s virtual_host=%s ssl=%s>' %
-                (self.__class__.__name__, self.host, self.port,
-                 self.virtual_host, bool(self.ssl_options)))
+        return (f'<{self.__class__.__name__} host={self.host} port={self.port} virtual_host={self.virtual_host} ssl={bool(self.ssl_options)}>')
 
     def __eq__(self, other):
         if isinstance(other, Parameters):
@@ -161,10 +159,10 @@ class Parameters:  # pylint: disable=R0902
         if value is not None:
             if not isinstance(value, numbers.Real):
                 raise TypeError('blocked_connection_timeout must be a Real '
-                                'number, but got %r' % (value,))
+                                f'number, but got {value!r}')
             if value < 0:
                 raise ValueError('blocked_connection_timeout must be >= 0, but '
-                                 'got %r' % (value,))
+                                 f'got {value!r}')
         self._blocked_connection_timeout = value
 
     @property
@@ -214,7 +212,7 @@ class Parameters:  # pylint: disable=R0902
                 type(None),
         )):
             raise TypeError('client_properties must be dict or None, '
-                            'but got %r' % (value,))
+                            f'but got {value!r}')
         # Copy the mutable object to avoid accidental side-effects
         self._client_properties = copy.deepcopy(value)
 
@@ -259,8 +257,8 @@ class Parameters:  # pylint: disable=R0902
 
         """
         if not isinstance(value, tuple(pika.credentials.VALID_TYPES)):
-            raise TypeError('credentials must be an object of type: %r, but '
-                            'got %r' % (pika.credentials.VALID_TYPES, value))
+            raise TypeError(f'credentials must be an object of type: {pika.credentials.VALID_TYPES!r}, but '
+                            f'got {value!r}')
         # Copy the mutable object to avoid accidental side-effects
         self._credentials = copy.deepcopy(value)
 
@@ -321,8 +319,7 @@ class Parameters:  # pylint: disable=R0902
         if value is not None:
             if not isinstance(value, numbers.Integral) and not callable(value):
                 raise TypeError(
-                    'heartbeat must be an int or a callable function, but got %r'
-                    % (value,))
+                    f'heartbeat must be an int or a callable function, but got {value!r}')
             if not callable(value) and value < 0:
                 raise ValueError(f'heartbeat must >= 0, but got {value!r}')
         self._heartbeat = value
@@ -427,7 +424,7 @@ class Parameters:  # pylint: disable=R0902
         if value is not None:
             if not isinstance(value, numbers.Real):
                 raise TypeError('socket_timeout must be a float or int, '
-                                'but got %r' % (value,))
+                                f'but got {value!r}')
             if value <= 0:
                 raise ValueError(
                     f'socket_timeout must be > 0, but got {value!r}')
@@ -458,7 +455,7 @@ class Parameters:  # pylint: disable=R0902
         if value is not None:
             if not isinstance(value, numbers.Real):
                 raise TypeError('stack_timeout must be a float or int, '
-                                'but got %r' % (value,))
+                                f'but got {value!r}')
             if value <= 0:
                 raise ValueError(
                     f'stack_timeout must be > 0, but got {value!r}')
@@ -735,8 +732,8 @@ class URLParameters(Parameters):
         elif parts.scheme == 'http':
             self.ssl_options = None
         elif parts.scheme:
-            raise ValueError('Unexpected URL scheme %r; supported scheme '
-                             'values: amqp, amqps' % (parts.scheme,))
+            raise ValueError(f'Unexpected URL scheme {parts.scheme!r}; supported scheme '
+                             'values: amqp, amqps')
 
         if parts.hostname is not None:
             self.host = parts.hostname
@@ -1209,7 +1206,7 @@ class Connection(pika.compat.AbstractBase):
         """
         if not self.is_open:
             raise exceptions.ConnectionWrongStateError(
-                'Channel allocation requires an open connection: %s' % self)
+                f'Channel allocation requires an open connection: {self}')
 
         validators.rpc_completion_callback(on_open_callback)
 
@@ -1239,7 +1236,7 @@ class Connection(pika.compat.AbstractBase):
         """
         if not self.is_open:
             raise exceptions.ConnectionWrongStateError(
-                'Secret update requires an open connection: %s' % self)
+                f'Secret update requires an open connection: {self}')
 
         validators.rpc_completion_callback(callback)
         self._rpc(0, spec.Connection.UpdateSecret(new_secret, reason),
@@ -1494,7 +1491,7 @@ class Connection(pika.compat.AbstractBase):
         """
         properties = {
             'product': PRODUCT,
-            'platform': 'Python %s' % platform.python_version(),
+            'platform': f'Python {platform.python_version()}',
             'capabilities': {
                 'authentication_failure_close': True,
                 'basic.nack': True,
@@ -1898,7 +1895,7 @@ class Connection(pika.compat.AbstractBase):
             if ret_heartbeat is None or callable(ret_heartbeat):
                 # Enforce callback-specific restrictions on callback's return value
                 raise TypeError('heartbeat callback must not return None '
-                                'or callable, but got %r' % (ret_heartbeat,))
+                                f'or callable, but got {ret_heartbeat!r}')
 
             # Leave it to hearbeat setter deal with the rest of the validation
             self.params.heartbeat = ret_heartbeat

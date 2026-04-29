@@ -137,7 +137,7 @@ class AsyncTestCase(unittest.TestCase):
     def shortDescription(self):
         method_desc = super(AsyncTestCase, self).shortDescription()
         if self.DESCRIPTION:
-            return "%s (%s)" % (self.DESCRIPTION, method_desc)
+            return f"{self.DESCRIPTION} ({method_desc})"
         else:
             return method_desc
 

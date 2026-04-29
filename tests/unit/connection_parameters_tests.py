@@ -104,8 +104,7 @@ class ParametersTestsBase(unittest.TestCase):
             self.assertEqual(
                 value,
                 expected_value,
-                msg='Expected %s=%r, but got %r' % (name, expected_value,
-                                                    value))
+                msg=f'Expected {name}={expected_value!r}, but got {value!r}')
 
 
 class ParametersTests(ParametersTestsBase):
@@ -541,8 +540,7 @@ class ConnectionParametersTests(ParametersTestsBase):
             self.assertEqual(
                 expected_values[t_param],
                 value,
-                msg='Expected %s=%r, but got %r' %
-                (t_param, expected_values[t_param], value))
+                msg=f'Expected {t_param}={expected_values[t_param]!r}, but got {value!r}')
 
     def test_callable_heartbeat(self):
         def heartbeat_callback(_connection, _broker_val):
@@ -679,7 +677,7 @@ class URLParametersTests(ParametersTestsBase):
         test_params = dict(query_args)
         virtual_host = '/'
         query_string = urlencode(test_params)
-        test_url = ('amqp://myuser:mypass@www.test.com:5678/%s?%s' % (
+        test_url = ('amqp://myuser:mypass@www.test.com:5678/{}?{}'.format(
             url_quote(virtual_host, safe=''),
             query_string,
         ))
@@ -695,8 +693,7 @@ class URLParametersTests(ParametersTestsBase):
             self.assertEqual(
                 actual_value,
                 expected_value,
-                msg='Expected %s=%r, but got %r' %
-                (t_param, expected_value, actual_value))
+                msg=f'Expected {t_param}={expected_value!r}, but got {actual_value!r}')
 
         # check all values from base URL
         self.assertEqual(params.credentials.username, 'myuser')

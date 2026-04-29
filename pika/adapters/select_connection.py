@@ -157,8 +157,7 @@ class _Timeout:
 
         if deadline < 0:
             raise ValueError(
-                'deadline must be non-negative epoch number, but got %r' %
-                (deadline,))
+                f'deadline must be non-negative epoch number, but got {deadline!r}')
 
         if not callable(callback):
             raise TypeError(

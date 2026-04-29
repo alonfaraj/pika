@@ -2077,11 +2077,11 @@ class TestTwoBasicConsumersOnSameChannel(BlockingTestCaseBase):
         ch.queue_bind(q2_name, exchange=exg_name, routing_key=q2_routing_key)
 
         # Deposit messages in the queues
-        q1_tx_message_bodies = ['q1_message+%s' % (i,) for i in range(100)]
+        q1_tx_message_bodies = [f'q1_message+{i}' for i in range(100)]
         for message_body in q1_tx_message_bodies:
             ch.basic_publish(exg_name, q1_routing_key, body=message_body, mandatory=True)
 
-        q2_tx_message_bodies = ['q2_message+%s' % (i,) for i in range(150)]
+        q2_tx_message_bodies = [f'q2_message+{i}' for i in range(150)]
         for message_body in q2_tx_message_bodies:
             ch.basic_publish(exg_name, q2_routing_key, body=message_body, mandatory=True)
 

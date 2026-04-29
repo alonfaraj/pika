@@ -117,7 +117,7 @@ class _CallbackResult:
         """Append an element to values"""
         assert not self._ready or isinstance(self._values, list), (
             '_CallbackResult state is incompatible with append_element: '
-            'ready=%r; values=%r' % (self._ready, self._values))
+            f'ready={self._ready!r}; values={self._values!r}')
 
         try:
             value = self._value_class(*args, **kwargs)
@@ -144,8 +144,7 @@ class _CallbackResult:
         """
         assert self._ready, '_CallbackResult was not set'
         assert isinstance(self._values, tuple) and len(self._values) == 1, (
-            '_CallbackResult value is incompatible with set_value_once: %r' %
-            (self._values,))
+            f'_CallbackResult value is incompatible with set_value_once: {self._values!r}')
 
         return self._values[0]
 
@@ -160,8 +159,7 @@ class _CallbackResult:
         """
         assert self._ready, '_CallbackResult was not set'
         assert isinstance(self._values, list) and self._values, (
-            '_CallbackResult value is incompatible with append_element: %r' %
-            (self._values,))
+            f'_CallbackResult value is incompatible with append_element: {self._values!r}')
 
         return self._values
 
@@ -1944,9 +1942,8 @@ class BlockingChannel:
             if params != self._queue_consumer_generator.params:
                 raise ValueError(
                     'Consume with different params not allowed on existing '
-                    'queue consumer generator; previous params: %r; '
-                    'new params: %r' % (self._queue_consumer_generator.params,
-                                        (queue, auto_ack, exclusive)))
+                    f'queue consumer generator; previous params: {self._queue_consumer_generator.params!r}; '
+                    f'new params: {(queue, auto_ack, exclusive)!r}')
         else:
             LOGGER.debug('Creating new queue consumer generator; params: %r',
                          params)

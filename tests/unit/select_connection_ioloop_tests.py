@@ -118,7 +118,7 @@ class IOLoopBaseTest(unittest.TestCase):
 
     def shortDescription(self):
         method_desc = super(IOLoopBaseTest, self).shortDescription()
-        return '%s (%s)' % (method_desc, self.SELECT_POLLER)
+        return f'{method_desc} ({self.SELECT_POLLER})'
 
     def start(self):
         """Setup timeout handler for detecting 'no-activity'

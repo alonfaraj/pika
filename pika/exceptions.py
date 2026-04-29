@@ -35,38 +35,30 @@ class IncompatibleProtocolError(AMQPConnectionError):
 class AuthenticationError(AMQPConnectionError):
 
     def __repr__(self):
-        return ('%s: Server and client could not negotiate use of the %s '
-                'authentication mechanism' % (self.__class__.__name__,
-                                              self.args[0]))
+        return (f'{self.__class__.__name__}: Server and client could not negotiate use of the {self.args[0]} '
+                'authentication mechanism')
 
 
 class ProbableAuthenticationError(AMQPConnectionError):
 
     def __repr__(self):
         return (
-            '%s: Client was disconnected at a connection stage indicating a '
-            'probable authentication error: %s' % (
-                self.__class__.__name__,
-                self.args,
-            ))
+            f'{self.__class__.__name__}: Client was disconnected at a connection stage indicating a '
+            f'probable authentication error: {self.args}')
 
 
 class ProbableAccessDeniedError(AMQPConnectionError):
 
     def __repr__(self):
         return (
-            '%s: Client was disconnected at a connection stage indicating a '
-            'probable denial of access to the specified virtual host: %s' % (
-                self.__class__.__name__,
-                self.args,
-            ))
+            f'{self.__class__.__name__}: Client was disconnected at a connection stage indicating a '
+            f'probable denial of access to the specified virtual host: {self.args}')
 
 
 class NoFreeChannels(AMQPConnectionError):
 
     def __repr__(self):
-        return '%s: The connection has run out of free channels' % (
-            self.__class__.__name__)
+        return f'{self.__class__.__name__}: The connection has run out of free channels'
 
 
 class ConnectionWrongStateError(AMQPConnectionError):
@@ -76,8 +68,8 @@ class ConnectionWrongStateError(AMQPConnectionError):
         if self.args:
             return super().__repr__()
         else:
-            return ('%s: The connection is in wrong state for the requested '
-                    'operation.' % self.__class__.__name__)
+            return (f'{self.__class__.__name__}: The connection is in wrong state for the requested '
+                    'operation.')
 
 
 class ConnectionClosed(AMQPConnectionError):
@@ -199,14 +191,14 @@ class ChannelClosedByClient(ChannelClosed):
 class DuplicateConsumerTag(AMQPChannelError):
 
     def __repr__(self):
-        return ('%s: The consumer tag specified already exists for this '
-                'channel: %s' % (self.__class__.__name__, self.args[0]))
+        return (f'{self.__class__.__name__}: The consumer tag specified already exists for this '
+                f'channel: {self.args[0]}')
 
 
 class ConsumerCancelled(AMQPChannelError):
 
     def __repr__(self):
-        return '%s: Server cancelled consumer' % self.__class__.__name__
+        return f'{self.__class__.__name__}: Server cancelled consumer'
 
 
 class UnroutableError(AMQPChannelError):
@@ -226,7 +218,7 @@ class UnroutableError(AMQPChannelError):
             of returned unroutable messages
         """
         super().__init__(
-            "%s unroutable message(s) returned" % (len(messages)))
+            f"{len(messages)} unroutable message(s) returned")
 
         self.messages = messages
 
@@ -247,7 +239,7 @@ class NackError(AMQPChannelError):
         :param sequence(blocking_connection.ReturnedMessage) messages: Sequence
             of returned unroutable messages
         """
-        super().__init__("%s message(s) NACKed" % (len(messages)))
+        super().__init__(f"{len(messages)} message(s) NACKed")
 
         self.messages = messages
 
@@ -265,8 +257,7 @@ class InvalidChannelNumber(AMQPError):
 class ProtocolSyntaxError(AMQPError):
 
     def __repr__(self):
-        return '%s: An unspecified protocol syntax error occurred' % (
-            self.__class__.__name__)
+        return f'{self.__class__.__name__}: An unspecified protocol syntax error occurred'
 
 
 class UnexpectedFrameError(ProtocolSyntaxError):
@@ -314,8 +305,7 @@ class MethodNotImplemented(AMQPError):
 class ChannelError(Exception):
 
     def __repr__(self):
-        return '%s: An unspecified error occurred with the Channel' % (
-            self.__class__.__name__)
+        return f'{self.__class__.__name__}: An unspecified error occurred with the Channel'
 
 
 class ReentrancyError(Exception):
@@ -330,12 +320,12 @@ class ReentrancyError(Exception):
 class ShortStringTooLong(AMQPError):
 
     def __repr__(self):
-        return ('%s: AMQP Short String can contain up to 255 bytes: '
-                '%.300s' % (self.__class__.__name__, self.args[0]))
+        return (f'{self.__class__.__name__}: AMQP Short String can contain up to 255 bytes: '
+                f'{self.args[0]:.300}')
 
 
 class DuplicateGetOkCallback(ChannelError):
 
     def __repr__(self):
-        return ('%s: basic_get can only be called again after the callback for '
-                'the previous basic_get is executed' % self.__class__.__name__)
+        return (f'{self.__class__.__name__}: basic_get can only be called again after the callback for '
+                'the previous basic_get is executed')

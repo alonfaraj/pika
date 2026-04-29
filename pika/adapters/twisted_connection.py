@@ -962,7 +962,7 @@ class TwistedChannel:
                     self._queue_name_to_consumer_tags.get(queue_name, set())):
                 self._consumers[consumer_tag].close(
                     exceptions.ConsumerCancelled(
-                        "Queue %s was deleted." % queue_name))
+                        f"Queue {queue_name} was deleted."))
                 del self._consumers[consumer_tag]
                 self._queue_name_to_consumer_tags[queue_name].remove(
                     consumer_tag)
