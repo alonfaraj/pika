@@ -229,8 +229,8 @@ class ExternalCredentialsTest(unittest.TestCase):
         start.mechanisms = 'FOO BAR BAZ'
         self.assertEqual(cred.response_for(start), (None, None))
 
-    # pylint: disable=R0201
-    def test_erase_credentials(self):
+    @staticmethod
+    def test_erase_credentials():
         with mock.patch('pika.credentials.LOGGER', autospec=True) as logger:
             cred = credentials.ExternalCredentials()
             cred.erase_credentials()

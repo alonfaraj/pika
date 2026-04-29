@@ -744,7 +744,8 @@ class ConnectionTests(unittest.TestCase):  # pylint: disable=R0904
     @mock.patch.object(connection.Connection,
                        'add_on_connection_unblocked_callback')
     def test_create_with_blocked_connection_timeout_config(
-            self, add_on_unblocked_callback_mock, add_on_blocked_callback_mock,
+            self,
+            add_on_unblocked_callback_mock, add_on_blocked_callback_mock,
             connect_mock):
 
         with mock.patch.object(ConstructibleConnection,

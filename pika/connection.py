@@ -955,9 +955,6 @@ class Connection(pika.compat.AbstractBase):
 
     """
 
-    # Disable pylint messages concerning "method could be a function"
-    # pylint: disable=R0201
-
     ON_CONNECTION_CLOSED = '_on_connection_closed'
     ON_CONNECTION_ERROR = '_on_connection_error'
     ON_CONNECTION_OPEN_OK = '_on_connection_open_ok'
@@ -1502,7 +1499,8 @@ class Connection(pika.compat.AbstractBase):
         """Add a callback for when a Connection.Tune frame is received."""
         self.callbacks.add(0, spec.Connection.Tune, self._on_connection_tune)
 
-    def _check_for_protocol_mismatch(self, value):
+    @staticmethod
+    def _check_for_protocol_mismatch(value):
         """Invoked when starting a connection to make sure it's a supported
         protocol.
 
@@ -1647,7 +1645,8 @@ class Connection(pika.compat.AbstractBase):
         """
         return self.callbacks.pending(value.channel_number, value.method)
 
-    def _is_method_frame(self, value):
+    @staticmethod
+    def _is_method_frame(value):
         """Returns true if the frame is a method frame.
 
         :param pika.frame.Frame value: The frame to evaluate
@@ -1656,7 +1655,8 @@ class Connection(pika.compat.AbstractBase):
         """
         return isinstance(value, frame.Method)
 
-    def _is_protocol_header_frame(self, value):
+    @staticmethod
+    def _is_protocol_header_frame(value):
         """Returns True if it's a protocol header frame.
 
         :rtype: bool
@@ -1802,7 +1802,8 @@ class Connection(pika.compat.AbstractBase):
 
         self._terminate_stream(None)
 
-    def _default_on_connection_error(self, _connection_unused, error):
+    @staticmethod
+    def _default_on_connection_error(_connection_unused, error):
         """Default behavior when the connecting connection cannot connect and
         user didn't supply own `on_connection_error` callback.
 

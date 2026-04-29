@@ -36,7 +36,8 @@ class Headers(BaseModel):
     task_type: Optional[str] = None
 
     @validator("priority", pre=True)
-    def _convert_priority(self, value):
+    @classmethod
+    def _convert_priority(cls, value):
         return Priority[value]
 
 
@@ -126,7 +127,8 @@ class BasicPikaClient:
 
 
 class BasicMessageSender(BasicPikaClient):
-    def encode_message(self, body: Dict, encoding_type: str = "bytes"):
+    @staticmethod
+    def encode_message(body: Dict, encoding_type: str = "bytes"):
         if encoding_type == "bytes":
             return msgpack.packb(body)
         else:
@@ -160,7 +162,8 @@ class BasicMessageReceiver(BasicPikaClient):
         super().__init__()
         self.channel_tag = None
 
-    def decode_message(self, body):
+    @staticmethod
+    def decode_message(body):
         if type(body) == bytes:
             return msgpack.unpackb(body)
         else:

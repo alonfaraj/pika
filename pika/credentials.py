@@ -108,7 +108,8 @@ class ExternalCredentials:
             return not result
         return NotImplemented
 
-    def response_for(self, start):  # pylint: disable=R0201
+    @staticmethod
+    def response_for(start):
         """Validate that this type of authentication is supported
 
         :param spec.Connection.Start start: Connection.Start method
@@ -120,7 +121,8 @@ class ExternalCredentials:
             return None, None
         return ExternalCredentials.TYPE, b''
 
-    def erase_credentials(self):  # pylint: disable=R0201
+    @staticmethod
+    def erase_credentials():
         """Called by Connection when it no longer needs the credentials"""
         LOGGER.debug('Not supported by this Credentials type')
 

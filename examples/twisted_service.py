@@ -244,7 +244,8 @@ class TestService(service.Service):
         super().__init__()
         self.amqp = None
 
-    def task(self, _msg): # pylint: disable=R0201
+    @staticmethod
+    def task(_msg):
         """
         Method for a time consuming task.
 

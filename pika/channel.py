@@ -30,9 +30,6 @@ class Channel:
 
     """
 
-    # Disable pylint messages concerning "method could be a function"
-    # pylint: disable=R0201
-
     CLOSED = 0
     OPENING = 1
     OPEN = 2
@@ -1157,7 +1154,8 @@ class Channel:
         self._consumers[consumer_tag](self, method_frame.method,
                                       header_frame.properties, body)
 
-    def _on_eventok(self, method_frame):
+    @staticmethod
+    def _on_eventok(method_frame):
         """Generic events that returned ok that may have internal callbacks.
         We keep a list of what we've yet to implement so that we don't silently
         drain events that we don't support.
@@ -1250,7 +1248,8 @@ class Channel:
             LOGGER.debug('Basic.Return received from server (%r, %r)',
                           method_frame.method, header_frame.properties)
 
-    def _on_selectok(self, method_frame):
+    @staticmethod
+    def _on_selectok(method_frame):
         """Called when the broker sends a Confirm.SelectOk frame
 
         :param pika.frame.Method method_frame: The method frame received
@@ -1430,7 +1429,8 @@ class Channel:
         """
         self._state = connection_state
 
-    def _on_unexpected_frame(self, frame_value):
+    @staticmethod
+    def _on_unexpected_frame(frame_value):
         """Invoked when a frame is received that is not setup to be processed.
 
         :param pika.frame.Frame frame_value: The frame received

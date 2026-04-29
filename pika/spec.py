@@ -395,7 +395,8 @@ class Connection(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -437,7 +438,8 @@ class Connection(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -493,7 +495,8 @@ class Connection(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -660,7 +663,8 @@ class Channel(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -819,7 +823,8 @@ class Exchange(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -877,7 +882,8 @@ class Exchange(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -944,7 +950,8 @@ class Exchange(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1011,7 +1018,8 @@ class Exchange(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1169,7 +1177,8 @@ class Queue(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1350,7 +1359,8 @@ class Queue(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1409,7 +1419,8 @@ class Basic(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1900,7 +1911,8 @@ class Basic(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1959,7 +1971,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1978,7 +1991,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -1997,7 +2011,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -2016,7 +2031,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -2035,7 +2051,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -2054,7 +2071,8 @@ class Tx(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
@@ -2105,7 +2123,8 @@ class Confirm(amqp_object.Class):
         def decode(self, encoded, offset=0):
             return self
 
-        def encode(self):
+        @staticmethod
+        def encode():
             pieces = list()
             return pieces
 
