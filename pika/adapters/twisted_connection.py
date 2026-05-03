@@ -250,6 +250,7 @@ class TwistedChannel:
     def is_closed(self):
         """Returns True if the channel is closed.
 
+        :returns: bool
         :rtype: bool
 
         """
@@ -260,6 +261,7 @@ class TwistedChannel:
         """Returns True if client-initiated closing of the channel is in
         progress.
 
+        :returns: bool
         :rtype: bool
 
         """
@@ -269,6 +271,7 @@ class TwistedChannel:
     def is_open(self):
         """Returns True if the channel is open.
 
+        :returns: bool
         :rtype: bool
 
         """
@@ -627,7 +630,7 @@ class TwistedChannel:
                              requeue the message. If requeue is false or the
                              requeue attempt fails the messages are discarded
                              or dead-lettered.
-        :raises: TypeError
+        :raises TypeError:
 
         """
         return self._channel.basic_reject(

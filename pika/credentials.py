@@ -68,6 +68,7 @@ class PlainCredentials:
         """Validate that this type of authentication is supported
 
         :param spec.Connection.Start start: Connection.Start method
+        :returns: tuple(str|None, str|None)
         :rtype: tuple(str|None, str|None)
 
         """
@@ -112,6 +113,7 @@ class ExternalCredentials:
         """Validate that this type of authentication is supported
 
         :param spec.Connection.Start start: Connection.Start method
+        :returns: tuple(str or None, str or None)
         :rtype: tuple(str or None, str or None)
 
         """
